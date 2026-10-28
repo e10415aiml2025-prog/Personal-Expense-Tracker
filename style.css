@@ -1,0 +1,39 @@
+* {
+    background-color: aliceblue;
+    text-align: center;
+}
+h2 {
+    border: 2px solid black;
+    background-color: skyblue;
+    border-radius: 10%;
+}
+h1 {
+    border: 2px solid black;
+    background-color: skyblue;
+    border-radius: 10%;
+}
+.indexbuttons {
+    background-color: skyblue;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+.Table {
+    background-color: aquamarine;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.tableCaptions {
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+    background-color: skyblue;
+    border: 1px solid black;
+    border-radius: 10%;
+}
+#deleteButton {
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 10%;
+}

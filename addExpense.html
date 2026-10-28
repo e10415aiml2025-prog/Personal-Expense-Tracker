@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addExpense</title>
+</head>
+<body>
+    <h2>Add Your Expense</h2>
+    <br><br>
+    <p class="indexbuttons">Enter date: <input type="text" id="date" placeholder="YYYY-MM-DD"></p>
+    <p class="indexbuttons">Enter amount: <input type="number" id="amount" placeholder="Enter amount"></p>
+    <p class="indexbuttons">Enter category: <input type="text" id="category" placeholder="Enter catagory"></p>
+    <br><br>
+    <button onclick=addExpense()>Add Expense</button>
+    <p id="Message"></p>
+    <script>
+
+        function addExpense() {
+
+    let date = document.getElementById("date").value;
+    let amount = document.getElementById("amount").value;
+    let category = document.getElementById("category").value;
+
+    let expense = {
+        date: date,
+        amount: amount,
+        category: category
+    };
+    
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    expenses.push(expense);
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
+}
+
+    </script>
+</body>
+</html>

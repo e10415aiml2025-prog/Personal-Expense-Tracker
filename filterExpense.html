@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Expense</title>
+</head>
+<body>
+    <h2>Filter Expenses</h2>
+
+    <input
+    type="text"
+    id="searchCategory"
+    placeholder="Search by category..."
+>
+
+<button onclick="filterExpense()">Search</button>
+    <button onclick="filterExpense()">Filter</button>
+
+    <table class="Table" border="1">
+        <caption class="tableCaptions">Filter Expense: </caption>
+        <thead>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Amount (₹)</th>
+            </tr>
+        </thead>
+        <tbody id="expenseTable"></tbody>
+    </table>
+    <script>
+    function filterExpense() {
+        let searchCategory = document
+            .getElementById("searchCategory")
+            .value.trim().toLowerCase();
+
+        let expenses = JSON.parse(
+            localStorage.getItem("expenses")
+        ) || [];
+
+        let expenseTable = document.getElementById("expenseTable");
+
+        // Clear previous results
+        expenseTable.innerHTML = "";
+
+        // Filter expenses by category
+        let filteredExpenses = expenses.filter(function(expense) {
+            return expense.category.toLowerCase().includes(searchCategory);
+        });
+
+        // Display matching expenses
+        filteredExpenses.forEach(function(expense, index) {
+            let row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${expense.category}</td>
+                <td>${expense.date}</td>
+                <td>₹${expense.amount}</td>
+            `;
+
+            expenseTable.appendChild(row);
+        });
+        // Calculate total of filtered expenses
+let total = filteredExpenses.reduce(function(sum, expense) {
+    return sum + Number(expense.amount);
+}, 0);
+
+// Add total row at the bottom
+let totalRow = document.createElement("tr");
+
+totalRow.innerHTML = `
+    <td colspan="3"><strong>Total Expense</strong></td>
+    <td><strong>₹${total.toFixed(2)}</strong></td>
+`;
+
+expenseTable.appendChild(totalRow);
+
+        // Show a message if nothing matches
+        if (filteredExpenses.length === 0) {
+            expenseTable.innerHTML =
+                '<tr><td colspan="4">No matching expenses found.</td></tr>';
+        }
+    }
+</script>
+</body>
+</html>
